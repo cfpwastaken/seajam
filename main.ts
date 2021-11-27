@@ -2,6 +2,7 @@
 
 namespace SpriteKind {
     export const PreFood = SpriteKind.create()
+    export const Check = SpriteKind.create()
 }
 
 scene.setBackgroundColor(9)
@@ -132,22 +133,23 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 	let check = sprites.create(assets.image`cursor`, SpriteKind.Food)
     check.x = playerSprite.x
     check.y = playerSprite.y
-    check.setKind(SpriteKind.Projectile)
-    basic.pause(100)
+    check.setKind(SpriteKind.Check)
+    basic.pause(50)
     check.destroy()
 })
 
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Food, function(sprite: Sprite, otherSprite: Sprite) {
+sprites.onOverlap(SpriteKind.Check, SpriteKind.Food, function(sprite: Sprite, otherSprite: Sprite) {
     sprite.destroy()
     otherSprite.destroy()
     info.changeScoreBy(1)
     trash.removeElement(otherSprite)
 })
 
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function(sprite: Sprite, otherSprite: Sprite) {
+sprites.onOverlap(SpriteKind.Check, SpriteKind.Enemy, function(sprite: Sprite, otherSprite: Sprite) {
     sprite.destroy()
     info.changeLifeBy(-1)
     music.smallCrash.play()
+
 })
 
 sprites.onOverlap(SpriteKind.PreFood, SpriteKind.Enemy, function(sprite: Sprite, otherSprite: Sprite) {
