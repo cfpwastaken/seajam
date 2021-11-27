@@ -6,6 +6,7 @@ namespace SpriteKind {
 }
 
 scene.setBackgroundColor(9)
+effects.bubbles.startScreenEffect()
 info.setLife(3)
 info.setScore(0)
 
