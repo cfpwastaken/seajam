@@ -116,7 +116,43 @@ function createShark() {
     })
 }
 
+function spawnFood() {
+    let food = randint(0, 11)
+    let item = sprites.create(assets.image`error`, SpriteKind.PreFood)
+    if (food == 0) {
+        item.setImage(assets.image`smallBurger`)
+    } else if (food == 1) {
+        item.setImage(assets.image`smallApple`)
+    } else if (food == 2) {
+        item.setImage(assets.image`smallLemon`)
+    } else if (food == 3) {
+        item.setImage(assets.image`smallDrumstick`)
+    } else if (food == 4) {
+        item.setImage(assets.image`smallHam`)
+    } else if (food == 5) {
+        item.setImage(assets.image`smallPizza`)
+    } else if (food == 6) {
+        item.setImage(assets.image`smallDonut`)
+    } else if (food == 7) {
+        item.setImage(assets.image`smallCake`)
+    } else if (food == 8) {
+        item.setImage(assets.image`smallIceCream`)
+    } else if (food == 9) {
+        item.setImage(assets.image`smallStrawberry`)
+    } else if (food == 10) {
+        item.setImage(assets.image`smallCherries`)
+    } else if (food == 11) {
+        item.setImage(assets.image`smallTaco`)
+    }
+    item.x = randint(0, scene.screenWidth() - 50)
+    item.y = randint(0, scene.screenHeight())
+    trash.push(item)
+    basic.pause(50)
+    item.setKind(SpriteKind.Food)
+}
+
 createShark()
+spawnFood()
 
 basic.forever(function() {
     if(trash.length == 0) {
@@ -124,12 +160,7 @@ basic.forever(function() {
         if(trashAmount > 100) trashAmount = 100
         if(trashAmount < 15) createShark()
         for(let i = 0; i < trashAmount; i++) {
-            let item = sprites.create(assets.image`smallBurger`, SpriteKind.PreFood)
-            item.x = randint(0, scene.screenWidth() - 50)
-            item.y = randint(0, scene.screenHeight())
-            trash.push(item)
-            basic.pause(50)
-            item.setKind(SpriteKind.Food)
+            spawnFood()
         }
     }
 })
