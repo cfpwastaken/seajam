@@ -5,6 +5,8 @@ namespace SpriteKind {
     export const Check = SpriteKind.create()
 }
 
+game.splash("SeaJam", "Made by cfp")
+
 scene.setBackgroundColor(9)
 info.setLife(3)
 info.setScore(0)
@@ -31,8 +33,11 @@ for(let i = 0; i < 3; i++) { // SO YOU HAVE TO USE THIS WEIRD `` SYNTAX? OH MY G
     }
 }
 
+let speed = 100
+
 // This only created sharks, now I added other fish too and I am too lazy to rename the function
 function createShark() {
+    speed += 10
     console.log("Creating shark")
     let fish = randint(0, 2)
     let shark = sprites.create(assets.image`error`, SpriteKind.Enemy)
@@ -42,7 +47,7 @@ function createShark() {
             animation.runImageAnimation(
                 shark,
                 assets.animation`sharkLeft`,
-                100,
+                speed,
                 true
             )
             shark.x = scene.screenWidth()
@@ -50,7 +55,7 @@ function createShark() {
             animation.runImageAnimation(
                 shark,
                 assets.animation`sharkRight`,
-                100,
+                speed,
                 true
             )
             shark.x = 0
@@ -60,7 +65,7 @@ function createShark() {
             animation.runImageAnimation(
                 shark,
                 assets.animation`angelFishLeft`,
-                100,
+                speed,
                 true
             )
             shark.x = scene.screenWidth()
@@ -68,7 +73,7 @@ function createShark() {
             animation.runImageAnimation(
                 shark,
                 assets.animation`angelFishRight`,
-                100,
+                speed,
                 true
             )
             shark.x = 0
@@ -78,7 +83,7 @@ function createShark() {
             animation.runImageAnimation(
                 shark,
                 assets.animation`clownFishLeft`,
-                100,
+                speed,
                 true
             )
             shark.x = scene.screenWidth()
@@ -86,7 +91,7 @@ function createShark() {
             animation.runImageAnimation(
                 shark,
                 assets.animation`clownFishRight`,
-                100,
+                speed,
                 true
             )
             shark.x = 0
@@ -94,7 +99,7 @@ function createShark() {
     }
     shark.y = randint(0, scene.screenHeight())
 
-    game.onUpdateInterval(10, function () {
+    game.onUpdateInterval(speed / 10, function () {
         if (leftOrRight == 0) {
             shark.x -= 1
             if (shark.x < 0) {
@@ -149,7 +154,15 @@ sprites.onOverlap(SpriteKind.Check, SpriteKind.Enemy, function(sprite: Sprite, o
     sprite.destroy()
     info.changeLifeBy(-1)
     music.smallCrash.play()
-
+    let projectile = sprites.createProjectileFromSprite(assets.image`error`, otherSprite, 0, 0)
+    animation.runImageAnimation(
+        projectile,
+        assets.animation`heart`,
+        100,
+        false
+    )
+    basic.pause(500)
+    projectile.destroy()
 })
 
 sprites.onOverlap(SpriteKind.PreFood, SpriteKind.Enemy, function(sprite: Sprite, otherSprite: Sprite) {
