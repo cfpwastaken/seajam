@@ -5,8 +5,6 @@ namespace SpriteKind {
     export const Check = SpriteKind.create()
 }
 
-game.splash("SeaJam", "Made by cfp")
-
 scene.setBackgroundColor(9)
 info.setLife(3)
 info.setScore(0)
@@ -16,10 +14,14 @@ playerSprite.z = 100
 controller.moveSprite(playerSprite)
 playerSprite.setStayInScreen(true)
 
+let statusbar = statusbars.create(30, 5, 0)
+statusbar.positionDirection(CollisionDirection.Top)
+statusbar.top += 2
+statusbar.max = 1
+statusbar.value = 0
+
 let trash: Sprite[] = []
 let trashAmount = 1
-
-trash.push(sprites.create(assets.image`smallBurger`, SpriteKind.Food))
 
 for (let i = 0; i < 3; i++) { // SO YOU HAVE TO USE THIS WEIRD `` SYNTAX? OH MY GOD
     let seaweed = sprites.create(assets.image`seaweed0`, SpriteKind.Enemy)
@@ -168,6 +170,8 @@ basic.forever(function() {
         for(let i = 0; i < trashAmount; i++) {
             spawnFood()
         }
+        statusbar.max = trash.length
+        statusbar.value = 0
     }
 })
 
@@ -185,6 +189,7 @@ sprites.onOverlap(SpriteKind.Check, SpriteKind.Food, function(sprite: Sprite, ot
     otherSprite.destroy()
     info.changeScoreBy(1)
     trash.removeElement(otherSprite)
+    statusbar.value += 1
 })
 
 sprites.onOverlap(SpriteKind.Check, SpriteKind.Enemy, function(sprite: Sprite, otherSprite: Sprite) {
