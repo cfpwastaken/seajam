@@ -84,6 +84,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "smallTaco"
     },
+    "image7": {
+        "data": "hwQQABAAAAAAAAAAAMDMzAAAAADMvMzMAAAAzL28y8wAAMzM28vLzADAu83cy8zMANu927zLzMyw3d3bu8u8zLDd3du7zLzL293d3My7vLvb3d3MzLy9u9vdvczdu727293N3N29zbu73cvc3b3NvLDMzNzdzc3MAADMzN3Ly8wAAADAzMzMzA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "mediumOceanRock"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",

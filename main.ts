@@ -21,16 +21,22 @@ let trashAmount = 1
 
 trash.push(sprites.create(assets.image`smallBurger`, SpriteKind.Food))
 
-for(let i = 0; i < 3; i++) { // SO YOU HAVE TO USE THIS WEIRD `` SYNTAX? OH MY GOD
+for (let i = 0; i < 3; i++) { // SO YOU HAVE TO USE THIS WEIRD `` SYNTAX? OH MY GOD
     let seaweed = sprites.create(assets.image`seaweed0`, SpriteKind.Enemy)
     seaweed.x = randint(5, 155)
     seaweed.y = scene.screenHeight() - 24
     let seaweedheight = randint(10, 30)
-    if(seaweedheight > 20) {
+    if (seaweedheight > 20) {
         seaweed.setImage(assets.image`seaweed1`)
-    } else if(seaweedheight > 10) {
+    } else if (seaweedheight > 10) {
         seaweed.setImage(assets.image`seaweed2`)
     }
+}
+
+for (let i = 0; i < 3; i++) {
+    let seaweed = sprites.create(assets.image`mediumOceanRock`, SpriteKind.Enemy)
+    seaweed.x = randint(5, 155)
+    seaweed.y = scene.screenHeight() - 5
 }
 
 let speed = 100
